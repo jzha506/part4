@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Frame</title>
+  <link rel="stylesheet" type="text/css" href="prototype_styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" type="text/javascript"></script>
+</head>
+  <body>
+    <h1>Machine Dashboard</h1>
+    <canvas id="temperatureChart" width="800" height="400"></canvas>
+    <canvas id="amplChart" width="800" height="400"></canvas>
+    <canvas id="forceChart" width="800" height ="400"></canvas>
+    <canvas id="powerChart" width="800" height = "400"></canvas>
+    <script>
+
+    var tempfile = $.getJSON('../JSON/temperatureDash.json', function(data) {
+      var datatempObj = data;
+      var chartElement = document.getElementById("temperatureChart").getContext('2d');
+      var temperatureChart = new Chart(chartElement, {
+        type: 'bar',
+        data: datatempObj,
+        options: {
+          scales: {
+            yAxes: [{
+                scaleLabel:{
+                  display:true,
+                  labelString:'Temperature (C)'
+                },
+                ticks: {
+                    beginAtZero:true
+                  }
+              }]
+            }
+          }
+        });
+    });
+
+    var amplfile = $.getJSON('../JSON/amplDash.json', function(data) {
+      var dataamplObj = data;
+      var chartElement = document.getElementById("amplChart").getContext('2d');
+      var amplChart = new Chart(chartElement, {
+        type: 'bar',
+        data: dataamplObj,
+        options: {
+          scales: {
+            yAxes: [{
+                scaleLabel:{
+                  display:true,
+                  labelString:'Amplitude (C)'
+                },
+                ticks: {
+                    beginAtZero:true
+                  }
+              }]
+            }
+          }
+        });
+    });
+
+    var forcefile = $.getJSON('../JSON/forceDash.json', function(data) {
+      var dataforceObj = data;
+      var chartElement = document.getElementById("forceChart").getContext('2d');
+      var forceChart = new Chart(chartElement, {
+        type: 'bar',
+        data: dataforceObj,
+        options: {
+          scales: {
+            yAxes: [{
+                scaleLabel:{
+                  display:true,
+                  labelString:'Machine Force (N)'
+                },
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+          }
+        }
+      });
+    });
+
+    var powerfile = $.getJSON('../JSON/powerDash.json', function(data) {
+      var datapowerObj = data;
+      var chartElement = document.getElementById("powerChart").getContext('2d');
+      var powerChart = new Chart(chartElement, {
+        type: 'bar',
+        data: datapowerObj,
+        options: {
+          scales: {
+            yAxes: [{
+                scaleLabel:{
+                  display:true,
+                  labelString:'Power Consumption (W)'
+                },
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+          }
+        }
+      });
+    });
+</script>
+</body>
+</html>

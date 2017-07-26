@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>Machine Condition</title>
+  <link rel="stylesheet" type="text/css" href="prototype_styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js" type="text/javascript"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" type="text/javascript"></script>
+</head>
+  <body>
+    <h1>Machine Condition</h1>
+    <canvas id="canvas2" width="800" height="400"></canvas>
+    <script>
+    var tempfile = $.getJSON('../JSON/machineConditionTime.json', function(data) {
+      var ctx2 = document.getElementById("canvas2").getContext("2d");
+      var myLine2 = new Chart(ctx2, {
+      type: 'line',
+      data: data,
+      options: {
+        elements: {
+          point: {
+            radius: 0
+          }
+        },
+        tooltips: {
+          enabled: false
+        },
+        title: {
+          display: true,
+          text: "Correct Usage of Time Scale (Passing Labels as Integers/Dates/Moments)",
+        },
+        scales: {
+          xAxes: [{
+            type: 'time',
+            time: {
+              tooltipFormat: 'lll',
+            }
+          }]
+        }
+      }
+    });
+  });
+
+
+/*
+    var lineChartData = {
+        datasets: [{
+            label: "My First dataset",
+            fill: false,
+            data: [{
+              x: 23,
+              y: 4
+            } ,{
+              x: 24,
+              y: 5
+            }],
+            yAxisID: "y-axis-1",
+        }, {
+            label: "My Second dataset",
+            fill: false,
+            data: [
+              {
+                x: 23,
+                y: 6
+              } ,{
+                x: 24,
+                y: 9
+              }],
+            yAxisID: "y-axis-2"
+        }]
+    };
+
+    window.onload = function() {
+        var ctx = document.getElementById("canvas2").getContext("2d");
+        window.myLine = Chart.Line(ctx, {
+            data: lineChartData,
+            options: {
+                responsive: true,
+                hoverMode: 'index',
+                stacked: false,
+                title:{
+                    display: true,
+                    text:'Chart.js Line Chart - Multi Axis'
+                },
+                scales: {
+                    yAxes: [{
+                        type: "linear", // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+                        display: true,
+                        position: "left",
+                        id: "y-axis-1",
+                    }, {
+                        type: "linear", // only linear but allow scale type registration. This allows extensions to exist solely for log scale for instance
+                        display: true,
+                        position: "right",
+                        id: "y-axis-2",
+
+                        // grid line settings
+                        gridLines: {
+                            drawOnChartArea: false, // only want the grid lines for one axis to show up
+                        },
+                    }],
+                }
+            }
+        });
+    };
+
+    document.getElementById('randomizeData').addEventListener('click', function() {
+        lineChartData.datasets.forEach(function(dataset) {
+            dataset.data = dataset.data.map(function() {
+                return randomScalingFactor();
+            });
+        });
+
+        window.myLine.update();
+    });
+    */
+
+</script>
+</body>
+</html>
